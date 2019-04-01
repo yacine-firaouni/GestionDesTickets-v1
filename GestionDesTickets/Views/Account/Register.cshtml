@@ -1,0 +1,103 @@
+﻿@model GestionDesTickets.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Créer un nouveau compte</h4>
+    <hr />
+
+
+    if (!Html.ViewData.ModelState.IsValid)
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-4 col-md-offset-2 alert alert-dismissible alert-danger">
+                    @Html.ValidationSummary("")
+                </div>
+            </div>
+        </div>
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sexe, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.DropDownList("Sexe", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Photo, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-success">
+                            Télécharger la photo&hellip;
+                            <input type="file" style="display: none;" name="Photo" accept=".png,.jpg,.jpeg,.tif" />
+                        </span>
+                    </label>
+                    <input type="text" class="form-control" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.DropDownList("Role", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Societe, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Societe, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-4">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 col-lg-offset-2">
+                <button type="reset" class="btn btn-warning">
+                    <i class="fas fa-eraser"></i> Annuler
+                </button>
+                <button type="submit" class="btn btn-success pull-right">
+                    <i class="fas fa-plus"></i> S'inscrire
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
